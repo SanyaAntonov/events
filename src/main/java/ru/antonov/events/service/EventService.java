@@ -7,15 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.antonov.events.model.Event;
 import ru.antonov.events.repository.EventRepository;
-import ru.antonov.events.to.EventTo;
 import ru.antonov.events.to.MonthScheduleTo;
-import ru.antonov.events.to.ScheduleElementTo;
-import ru.antonov.events.util.*;
+import ru.antonov.events.util.ScheduleUtil;
+import ru.antonov.events.util.ValidationUtil;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static ru.antonov.events.util.ValidationUtil.checkNotFoundWithId;
 
@@ -30,15 +27,16 @@ public class EventService {
     }
 
     @Cacheable("event")
-    public List<Event> getAll() {
-        return repository.getAll();
+    public List<Event> getAll(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        return repository.getEventsForTwoMonths(startDateTime, endDateTime);
     }
 
-    @Cacheable("event")
+//    Для истории проведенных мероприятий
+    /*@Cacheable("event")
     public List<MonthScheduleTo> getArchive() {
         List<Event> allEvents = repository.getAll();
         return ScheduleUtil.getMonthScheduleTos(allEvents);
-    }
+    }*/
 
     @Cacheable("event")
     public List<MonthScheduleTo> getEventsForTwoMonths(LocalDateTime startOfFirstMonth,

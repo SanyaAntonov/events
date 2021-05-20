@@ -1,5 +1,6 @@
 package ru.antonov.events.repository;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.antonov.events.model.Subscriber;
@@ -31,10 +32,12 @@ public class SubscriberRepository {
                 .executeUpdate() != 0;
     }
 
+    @Secured("ROLE_ADMIN")
     public Subscriber get(int id) {
         return em.find(Subscriber.class, id);
     }
 
+    @Secured("ROLE_ADMIN")
     public List<Subscriber> getAll() {
         return em.createQuery("SELECT s FROM Subscriber s ORDER BY s.email", Subscriber.class)
                 .getResultList();

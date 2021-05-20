@@ -1,4 +1,4 @@
-**REST / Spring Boot / Security / JPA / H2 / Lombok / Swagger UI**
+**REST / Spring Boot / Security / Hibernate / H2 / Lombok / Swagger UI**
 ##
 **Тестовое задание на позицию Backend разработчик**
 ##
@@ -11,7 +11,7 @@
 - Spring Boot
 - Spring Security
 - REST
-- Spring Data JPA
+- Hibernate
 - H2 DB
 - Maven
 - JUnit

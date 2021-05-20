@@ -1,9 +1,11 @@
 package ru.antonov.events.util;
 
+import lombok.experimental.UtilityClass;
 import ru.antonov.events.model.BaseEntity;
 import ru.antonov.events.util.exception.IllegalRequestDataException;
 import ru.antonov.events.util.exception.NotFoundException;
 
+@UtilityClass
 public class ValidationUtil {
 
     public static <T> T checkNotFoundWithId(T object, int id) {

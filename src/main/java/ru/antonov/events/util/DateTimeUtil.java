@@ -1,13 +1,12 @@
 package ru.antonov.events.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@UtilityClass
 public class DateTimeUtil {
     public static final String DATE_TIME_PATTERN = "dd-MM-dd HH:mm";
     public static final String LOCAL_TIME_PATTERN = "HH:mm";

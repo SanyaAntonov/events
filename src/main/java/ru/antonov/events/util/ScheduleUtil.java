@@ -1,7 +1,6 @@
 package ru.antonov.events.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 import ru.antonov.events.model.Event;
 import ru.antonov.events.to.EventTo;
 import ru.antonov.events.to.MonthScheduleTo;
@@ -11,10 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@UtilityClass
 public class ScheduleUtil {
     public static List<MonthScheduleTo> getMonthScheduleTos(List<Event> allEvents) {
         List<MonthScheduleTo> months = new ArrayList<>();
+
+        if (allEvents.isEmpty()) {
+            return months;
+        }
 
         for (Event event : allEvents) {
             if (!months.isEmpty()) {

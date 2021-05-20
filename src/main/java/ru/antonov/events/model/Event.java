@@ -1,6 +1,5 @@
 package ru.antonov.events.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import ru.antonov.events.util.DateTimeUtil;
@@ -12,7 +11,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "event")
@@ -28,7 +26,7 @@ public class Event extends BaseEntity {
     @Size(min = 5, max = 128)
     private String title;
 
-    @Column(name = "description", nullable = false, columnDefinition="TEXT")
+    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     @NotBlank
     @Size(min = 50)
     private String description;
@@ -37,11 +35,6 @@ public class Event extends BaseEntity {
     @NotNull
     @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
     private LocalDateTime dateTime;
-
-    @Column(name = "created", nullable = false, columnDefinition = "timestamp default now()")
-    @NotNull
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Date created = new Date();
 
     @Column(name = "city", nullable = false)
     @NotBlank
@@ -62,4 +55,22 @@ public class Event extends BaseEntity {
     @NotBlank
     @Size(min = 2, max = 128)
     private String speaker2;
+
+    public Event(Integer id,
+                 @NotBlank @Size(min = 5, max = 128) String title,
+                 @NotBlank @Size(min = 50) String description,
+                 @NotNull LocalDateTime dateTime,
+                 @NotBlank @Size(min = 2, max = 64) String city,
+                 @NotBlank @Size(min = 2, max = 64) String address,
+                 @NotBlank @Size(min = 2, max = 128) String speaker1,
+                 @NotBlank @Size(min = 2, max = 128) String speaker2) {
+        super(id);
+        this.title = title;
+        this.description = description;
+        this.dateTime = dateTime;
+        this.city = city;
+        this.address = address;
+        this.speaker1 = speaker1;
+        this.speaker2 = speaker2;
+    }
 }

@@ -1,7 +1,6 @@
 package ru.antonov.events.web;
 
-//import io.swagger.v3.oas.annotations.tags.Tag;
-
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,7 @@ import java.util.List;
 @RequestMapping("/events")
 @AllArgsConstructor
 @Slf4j
-//@Tag(name = "Event Controller")
+@Tag(name = "Event Controller")
 public class EventController {
 
     private final EventService service;

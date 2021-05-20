@@ -22,7 +22,7 @@ spring:
 
   data.rest:
     #  https://docs.spring.io/spring-data/rest/docs/current/reference/html/#getting-started.basic-settings
-    basePath: /events
+    basePath: /
     defaultPageSize: 20
     returnBodyOnCreate: true
 

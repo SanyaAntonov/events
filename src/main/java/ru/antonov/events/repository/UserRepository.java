@@ -14,16 +14,6 @@ public class UserRepository {
     @PersistenceContext
     private EntityManager em;
 
-    @Transactional
-    public User save(User user) {
-        if (user.isNew()) {
-            em.persist(user);
-            return user;
-        } else {
-            return em.merge(user);
-        }
-    }
-
     public User findByEmailIgnoreCase(String email) {
         User user = em.createQuery("SELECT u FROM User u WHERE u.email = LOWER(:email)", User.class)
                 .setParameter("email", email)

@@ -1,9 +1,15 @@
 package ru.antonov.events.util;
 
+import lombok.experimental.UtilityClass;
+
 import java.time.Month;
 
+@UtilityClass
 public class MonthConverter {
     public static String toStringInTo(Month month) {
+        if (month == null) {
+            throw new IllegalArgumentException();
+        }
         switch (month) {
             case JANUARY -> {
                 return "Января";
@@ -42,10 +48,13 @@ public class MonthConverter {
                 return "Декабря";
             }
         }
-        return "";
+        throw new IllegalArgumentException();
     }
 
     public static String toStringInSchedule(Month month) {
+        if (month == null) {
+            throw new IllegalArgumentException();
+        }
         switch (month) {
             case JANUARY -> {
                 return "Январь";
@@ -84,9 +93,13 @@ public class MonthConverter {
                 return "Декабрь";
             }
         }
-        return "";
+        throw new IllegalArgumentException();
     }
+
     public static Month toMonth(String month) {
+        if (month == null) {
+            throw new IllegalArgumentException();
+        }
         if (month.equals("Январь") || month.equals("Января"))
             return Month.JANUARY;
         if (month.equals("Февраль") || month.equals("Февраля"))
@@ -112,6 +125,6 @@ public class MonthConverter {
         if (month.equals("Декабрь") || month.equals("Декабря"))
             return Month.DECEMBER;
 
-        return null;
+        throw new IllegalArgumentException();
     }
 }

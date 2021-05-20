@@ -1,13 +1,12 @@
 package ru.antonov.events.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 import ru.antonov.events.model.Event;
 import ru.antonov.events.to.EventTo;
 
 import java.time.LocalDateTime;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@UtilityClass
 public class EventUtil {
 
     public static EventTo getEventTo(Event event) {

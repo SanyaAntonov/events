@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
@@ -35,22 +36,21 @@ public class EventRepository {
                 .executeUpdate() != 0;
     }
 
-    public Event get(int id) {
-        return em.find(Event.class, id);
+    public Optional<Event> get(int id) {
+        return Optional.ofNullable(em.find(Event.class, id));
     }
-
-    public List<Event> getAll() {
-        return em.createQuery("SELECT e FROM Event e ORDER BY e.dateTime", Event.class)
-                .getResultList();
-    }
-
-    public List<Event> getEventsForTwoMonths(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        return em.createQuery("""
+    public Optional<List<Event>> getEventsForTwoMonths(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        return Optional.ofNullable(em.createQuery("""
                     SELECT e FROM Event e
                     WHERE e.dateTime >= :startDateTime AND e.dateTime < :endDateTime ORDER BY e.dateTime
                 """, Event.class)
                 .setParameter("startDateTime", startDateTime)
                 .setParameter("endDateTime", endDateTime)
-                .getResultList();
+                .getResultList());
     }
+
+/*    public List<Event> getAll() {
+        return em.createQuery("SELECT e FROM Event e ORDER BY e.dateTime", Event.class)
+                .getResultList();
+    }*/
 }

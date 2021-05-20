@@ -22,4 +22,9 @@ public class Subscriber extends BaseEntity {
     @NotEmpty
     @Size(max = 128)
     private String email;
+
+    public Subscriber(Integer id, @Email @NotEmpty @Size(max = 128) String email) {
+        super(id);
+        this.email = email;
+    }
 }

@@ -42,11 +42,6 @@ public class User extends BaseEntity implements Serializable {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    public User(Integer id, String email, String firstName, String lastName, String password, Collection<Role> roles) {
-        this(email, firstName, lastName, password, EnumSet.copyOf(roles));
-        this.id = id;
-    }
-
     public void setEmail(String email) {
         this.email = StringUtils.hasText(email) ? email.toLowerCase() : null;
     }

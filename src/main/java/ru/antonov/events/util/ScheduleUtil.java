@@ -33,7 +33,7 @@ public class ScheduleUtil {
                                 elementTo.setEventList(eventList);
                                 elementTo.setNumberOfEvents(eventList.size());
                             } else {
-                                if (elements1.size() > 1)
+                                if (elements1.size() > 1 && elements1.indexOf(elementTo) != elements1.size() - 1)
                                     continue;
                                 ScheduleElementTo to = new ScheduleElementTo();
                                 to.setCityName(event.getCity());
@@ -47,7 +47,7 @@ public class ScheduleUtil {
                             }
                         }
                     } else {
-                        if (months1.size() > 1)
+                        if (months1.size() > 1 && months1.indexOf(monthScheduleTo) != months1.size() - 1)
                             continue;
                         MonthScheduleTo scheduleTo = new MonthScheduleTo();
                         scheduleTo.setMonth(MonthConverter.toStringInSchedule(event.getDateTime().getMonth()));

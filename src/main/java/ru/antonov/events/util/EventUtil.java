@@ -14,6 +14,7 @@ public class EventUtil {
         LocalDateTime dateTime = event.getDateTime();
 
         eventTo.setId(event.id());
+        eventTo.setTitle(event.getTitle());
         eventTo.setCity(event.getCity());
         eventTo.setMonth(MonthConverter.toStringInTo(dateTime.getMonth()));
         eventTo.setDayOfMonth(dateTime.getDayOfMonth());

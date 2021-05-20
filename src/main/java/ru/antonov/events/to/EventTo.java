@@ -11,6 +11,7 @@ import java.time.LocalTime;
 @Setter
 public class EventTo {
     private int id;
+    private String title;
     private String city;
     private String month;
     private int dayOfMonth;

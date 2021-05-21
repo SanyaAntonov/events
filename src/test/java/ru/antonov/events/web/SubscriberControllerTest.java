@@ -26,7 +26,7 @@ class SubscriberControllerTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(value = "admin@gmail.com")
     void getAllSubs() throws Exception {
-        perform(MockMvcRequestBuilders.get("/events"))
+        perform(MockMvcRequestBuilders.get("/subscribers"))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE));

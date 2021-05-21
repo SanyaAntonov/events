@@ -1,6 +1,5 @@
 package ru.antonov.events.repository;
 
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.antonov.events.model.Subscriber;
@@ -40,6 +39,6 @@ public class SubscriberRepository {
     public Optional<List<Subscriber>> getAll() {
         return Optional.ofNullable(
                 em.createQuery("SELECT s FROM Subscriber s ORDER BY s.email", Subscriber.class)
-                .getResultList());
+                        .getResultList());
     }
 }

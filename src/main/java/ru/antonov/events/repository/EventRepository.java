@@ -39,6 +39,7 @@ public class EventRepository {
     public Optional<Event> get(int id) {
         return Optional.ofNullable(em.find(Event.class, id));
     }
+
     public Optional<List<Event>> getEventsForTwoMonths(LocalDateTime startDateTime, LocalDateTime endDateTime) {
         return Optional.ofNullable(em.createQuery("""
                     SELECT e FROM Event e

@@ -25,8 +25,7 @@ public class EventService {
 
     public Event get(int id) {
         return checkNotFoundWithId(repository.get(id)
-                .orElseThrow(() -> new NotFoundException("Event not found"))
-                , id);
+                        .orElseThrow(() -> new NotFoundException("Event not found")), id);
     }
 
     @Cacheable("event")

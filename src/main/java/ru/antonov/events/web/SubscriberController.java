@@ -34,6 +34,7 @@ public class SubscriberController {
 
     @GetMapping("/subscribers/{id}")
     public ResponseEntity<Subscriber> getSub(@PathVariable int id) {
+        log.info("get Sub with id = {}", id);
         Subscriber subscriber = subscriberRepository.get(id)
                 .orElseThrow(() -> new NotFoundException("Sub not found"));
         ValidationUtil.assureIdConsistent(subscriber, id);

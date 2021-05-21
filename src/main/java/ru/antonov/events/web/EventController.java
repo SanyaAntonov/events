@@ -32,6 +32,7 @@ public class EventController {
 
     @GetMapping("{id}")
     public ResponseEntity<Event> getEvent(@PathVariable int id) {
+        log.info("get Event with id = {}", id);
         Event event = service.get(id);
         ValidationUtil.assureIdConsistent(event, id);
         return new ResponseEntity<>(event, HttpStatus.OK);

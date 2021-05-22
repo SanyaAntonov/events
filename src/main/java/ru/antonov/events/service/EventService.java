@@ -25,7 +25,7 @@ public class EventService {
 
     public Event get(int id) {
         return checkNotFoundWithId(repository.get(id)
-                        .orElseThrow(() -> new NotFoundException("Event not found")), id);
+                .orElseThrow(() -> new NotFoundException("Event not found")), id);
     }
 
     @Cacheable("event")
@@ -34,7 +34,7 @@ public class EventService {
                 .orElseThrow(() -> new NotFoundException("Events not found"));
     }
 
-    @Cacheable("event")
+    @Cacheable("eventsSchedule")
     public List<MonthScheduleTo> getEventsForTwoMonths(LocalDateTime startOfFirstMonth,
                                                        LocalDateTime endOfNextMonth) {
         List<Event> allEvents = repository.getEventsForTwoMonths(startOfFirstMonth, endOfNextMonth)
@@ -43,26 +43,26 @@ public class EventService {
         return ScheduleUtil.getMonthScheduleTos(allEvents);
     }
 
-    @CacheEvict(value = "event", allEntries = true)
+    @CacheEvict(cacheNames = {"event", "eventsSchedule"}, allEntries = true)
     public Event create(Event event) {
         ValidationUtil.checkNew(event);
         Assert.notNull(event, "event must not be null");
         return repository.save(event);
     }
 
-    @CacheEvict(value = "event", allEntries = true)
+    @CacheEvict(cacheNames = {"event", "eventsSchedule"}, allEntries = true)
     public void delete(int id) {
         checkNotFoundWithId(repository.delete(id), id);
     }
 
-    @CacheEvict(value = "event", allEntries = true)
+    @CacheEvict(cacheNames = {"event", "eventsSchedule"}, allEntries = true)
     public void update(Event event) {
         Assert.notNull(event, "event must not be null");
         checkNotFoundWithId(repository.save(event), event.id());
     }
 
     //    Для истории проведенных мероприятий
-    /*@Cacheable("event")
+    /*@Cacheable("AllEventsHistory")
     public List<MonthScheduleTo> getArchive() {
         List<Event> allEvents = repository.getAll();
         return ScheduleUtil.getMonthScheduleTos(allEvents);

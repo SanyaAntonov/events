@@ -26,12 +26,12 @@ public class SubscriberTestUtil {
         assertThat(actual).usingRecursiveComparison().ignoringFields("id").isEqualTo(expected);
     }
 
-    public static Subscriber asEvent(MvcResult mvcResult) throws UnsupportedEncodingException, JsonProcessingException {
+    public static Subscriber asSubscriber(MvcResult mvcResult) throws UnsupportedEncodingException, JsonProcessingException {
         String jsonActual = mvcResult.getResponse().getContentAsString();
         return JsonUtil.readValue(jsonActual, Subscriber.class);
     }
 
     public static ResultMatcher jsonMatcher(Subscriber expected, BiConsumer<Subscriber, Subscriber> equalsAssertion) {
-        return mvcResult -> equalsAssertion.accept(asEvent(mvcResult), expected);
+        return mvcResult -> equalsAssertion.accept(asSubscriber(mvcResult), expected);
     }
 }

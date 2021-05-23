@@ -23,6 +23,7 @@ public class ScheduleUtil {
         for (Event event : allEvents) {
             if (months.isEmpty()) {
                 createNewMonthScheduleTo(months, event);
+                continue;
             }
             List<MonthScheduleTo> months1 = new ArrayList<>(months);
             for (MonthScheduleTo monthScheduleTo : months1) {

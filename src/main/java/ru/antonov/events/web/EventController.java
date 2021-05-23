@@ -49,6 +49,7 @@ public class EventController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateEvent(@PathVariable int id, @RequestBody Event event) {
         log.info("update Event with id = {}", id);
+        event.setId(id);
         service.update(event);
     }
 

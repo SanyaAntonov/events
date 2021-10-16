@@ -39,15 +39,8 @@ logging:
     ru.antonov.events: DEBUG
 #    org.springframework.security.web.FilterChainProxy: DEBUG
 
-server.servlet:
-  encoding:
-    charset: UTF-8 # Charset of HTTP requests and responses. Added to the "Content-Type" header if not set explicitly
-    enabled: true # Enable http encoding support
-    force: true
-
-# Jackson Serialization Issue Resolver
-#  jackson:
-#    visibility.field: any
-#    visibility.getter: none
-#    visibility.setter: none
-#    visibility.is-getter: none
+#server.servlet:
+#  encoding:
+#    charset: UTF-8 # Charset of HTTP requests and responses. Added to the "Content-Type" header if not set explicitly
+#    enabled: true # Enable http encoding support
+#    force: true

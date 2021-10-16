@@ -1,57 +1,26 @@
 package ru.antonov.events.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ru.antonov.events.model.Event;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-@Transactional(readOnly = true)
-public class EventRepository {
-    @PersistenceContext
-    private EntityManager em;
+public interface EventRepository extends JpaRepository<Event, Integer> {
+    @Query("select e from Event e where e.dateTime between :startDateTime and :endDateTime order by e.dateTime")
+    Optional<List<Event>> findAllByDateTimeBetweenOrderByDateTime(
+        @Param("startDateTime") LocalDateTime startDateTime,
+        @Param("endDateTime") LocalDateTime endDateTime);
 
+    @Override
     @Secured("ROLE_ADMIN")
-    @Transactional
-    public Event save(Event event) {
-        if (event.isNew()) {
-            em.persist(event);
-            return event;
-        } else {
-            return em.merge(event);
-        }
-    }
+    <S extends Event> S save(S s);
 
+    @Override
     @Secured("ROLE_ADMIN")
-    @Transactional
-    public boolean delete(int id) {
-        return em.createQuery("DELETE FROM Event e where e.id=:id")
-                .setParameter("id", id)
-                .executeUpdate() != 0;
-    }
-
-    public Optional<Event> get(int id) {
-        return Optional.ofNullable(em.find(Event.class, id));
-    }
-
-    public Optional<List<Event>> getEventsForTwoMonths(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        return Optional.ofNullable(em.createQuery("""
-                    SELECT e FROM Event e
-                    WHERE e.dateTime >= :startDateTime AND e.dateTime < :endDateTime ORDER BY e.dateTime
-                """, Event.class)
-                .setParameter("startDateTime", startDateTime)
-                .setParameter("endDateTime", endDateTime)
-                .getResultList());
-    }
-
-/*    public List<Event> getAll() {
-        return em.createQuery("SELECT e FROM Event e ORDER BY e.dateTime", Event.class)
-                .getResultList();
-    }*/
+    void deleteById(Integer integer);
 }

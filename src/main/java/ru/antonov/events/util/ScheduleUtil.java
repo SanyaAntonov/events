@@ -2,9 +2,9 @@ package ru.antonov.events.util;
 
 import lombok.experimental.UtilityClass;
 import ru.antonov.events.model.Event;
-import ru.antonov.events.to.EventTo;
-import ru.antonov.events.to.MonthScheduleTo;
-import ru.antonov.events.to.ScheduleElementTo;
+import ru.antonov.events.dto.EventTo;
+import ru.antonov.events.dto.MonthScheduleTo;
+import ru.antonov.events.dto.ScheduleElementTo;
 
 import java.util.ArrayList;
 import java.util.List;

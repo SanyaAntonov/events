@@ -1,12 +1,10 @@
-package ru.antonov.events.to;
+package ru.antonov.events.dto;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalTime;
 
-@NoArgsConstructor
 @Getter
 @Setter
 public class EventTo {

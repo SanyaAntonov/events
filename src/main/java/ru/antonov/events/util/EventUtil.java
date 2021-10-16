@@ -2,7 +2,7 @@ package ru.antonov.events.util;
 
 import lombok.experimental.UtilityClass;
 import ru.antonov.events.model.Event;
-import ru.antonov.events.to.EventTo;
+import ru.antonov.events.dto.EventTo;
 
 import java.time.LocalDateTime;
 

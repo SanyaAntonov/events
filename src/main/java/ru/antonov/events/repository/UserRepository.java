@@ -1,24 +1,14 @@
 package ru.antonov.events.repository;
 
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
+import org.springframework.data.jpa.repository.JpaRepository;
 import ru.antonov.events.model.User;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import java.util.Optional;
 
-@Repository
-@Transactional(readOnly = true)
-public class UserRepository {
-    @PersistenceContext
-    private EntityManager em;
+public interface UserRepository extends JpaRepository<User, Integer> {
 
-    public User findByEmailIgnoreCase(String email) {
-        User user = em.createQuery("SELECT u FROM User u WHERE u.email = LOWER(:email)", User.class)
-                .setParameter("email", email)
-                .getSingleResult();
-        Assert.notNull(user, "user must not be null");
-        return user;
-    }
+    Optional<User> findByEmailIgnoreCase(@Email @NotEmpty @Size(max = 128) String email);
 }

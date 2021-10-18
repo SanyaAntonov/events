@@ -53,7 +53,7 @@ public class EventService {
     //    Для истории проведенных мероприятий
     /*@Cacheable("AllEventsHistory")
     public List<MonthScheduleTo> getArchive() {
-        List<Event> allEvents = repository.getAll();
+        List<Event> allEvents = repository.findAll();
         return ScheduleUtil.getMonthScheduleTos(allEvents);
     }*/
 }

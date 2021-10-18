@@ -1,6 +1,5 @@
 package ru.antonov.events.web;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -25,7 +24,7 @@ class EventControllerTest extends AbstractControllerTest {
     private final Event event = new Event(
             EVENT_ID,
             "Как жить в новом ужасном мире (Со взглядом в прошлое)",
-            "Огромный текст",
+            "Огромный текст Огромный текст Огромный текстОгромный текстОгромный текстОгромный текстОгромный текст",
             LocalDateTime.of(2021, Month.MAY, 28, 14, 0),
             "Москва" ,
             "Какая-то улица 25",
@@ -34,7 +33,8 @@ class EventControllerTest extends AbstractControllerTest {
 
     @Test
     void getAllEvents() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/events"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/events")
+                        .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE));
@@ -42,7 +42,8 @@ class EventControllerTest extends AbstractControllerTest {
 
     @Test
     void getEvent() throws Exception {
-        byte[] contentAsByteArray = mockMvc.perform(MockMvcRequestBuilders.get("/events/1"))
+        byte[] contentAsByteArray = mockMvc.perform(MockMvcRequestBuilders.get("/events/1")
+                        .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
@@ -59,7 +60,7 @@ class EventControllerTest extends AbstractControllerTest {
     void createEvent() throws Exception {
         Event aNew = new Event(null,
                 "Новое Мероприятие",
-                "Описание",
+                "ОписаниеОгромный текстОгромный текстОгромный текстОгромный текстОгромный текстОгромный текстОгромный текстОгромный текстОгромный текст",
                 LocalDateTime.now().plusMonths(1).toLocalDate().atStartOfDay().withHour(15),
                 "Екатеринбург" ,
                 "Улица Пушкана, дом колотушкина",
@@ -68,9 +69,9 @@ class EventControllerTest extends AbstractControllerTest {
         byte[] contentAsByteArray = mockMvc.perform(MockMvcRequestBuilders.post("/events")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(aNew)))
-                        .andExpect(status().isCreated()).andReturn()
-                        .getResponse()
-                        .getContentAsByteArray();
+                .andExpect(status().isCreated()).andReturn()
+                .getResponse()
+                .getContentAsByteArray();
 
         Event response = objectMapper.readValue(contentAsByteArray, Event.class);
         assertEquals(aNew.getDescription(), response.getDescription());
@@ -91,10 +92,10 @@ class EventControllerTest extends AbstractControllerTest {
         byte[] contentAsByteArray = mockMvc.perform(MockMvcRequestBuilders.put("/events/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(updated)))
-                        .andExpect(status().isNoContent())
-                        .andReturn()
-                        .getResponse()
-                        .getContentAsByteArray();
+                .andExpect(status().isNoContent())
+                .andReturn()
+                .getResponse()
+                .getContentAsByteArray();
 
         Event response = objectMapper.readValue(contentAsByteArray, Event.class);
         assertEquals(updated.getDescription(), response.getDescription());
@@ -111,7 +112,8 @@ class EventControllerTest extends AbstractControllerTest {
 
     @Test
     void getSchedule() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/events/schedule"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/events/schedule")
+                        .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE));
